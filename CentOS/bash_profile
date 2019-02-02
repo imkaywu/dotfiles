@@ -1,0 +1,17 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/openmpi/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi/lib/:/nfs/project/boost_1_65_1/stage/lib
+
+export PATH
+export LC_ALL=en_US.UTF-8
+
+/usr/bin/keychain $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOSTNAME-sh
