@@ -179,6 +179,12 @@ Plugin 'VundleVim/Vundle.vim'
 " color scheme papercolor-theme
 Plugin 'NLKNguyen/papercolor-theme'
 
+" Goyo distraction-free writing
+Plugin 'junegunn/goyo.vim'
+
+" Latex-Box
+Plugin 'LaTex-Box-Team/LaTex-Box'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -186,7 +192,15 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+" Goyo
+let g:goyo_width=105
 
+" Latex-Box
+let g:tex_flavor="latex"
+let g:tex_fast="cmMprs"
+let g:tex_conceal=""
+let g:tex_fold_enabled=0
+let g:tex_comment_nospell=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
