@@ -7,6 +7,13 @@
 "     -> VIM user interface
 "     -> Colors and Fonts
 "     -> Files and backups
+"     -> Text, tab and indent related
+"     -> Search settings
+"     -> Status line
+"     -> Mapping
+"     -> Plugin Management
+"     -> Plugin Config
+"     -> Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -57,7 +64,7 @@ set clipboard=unnamed
 " Enable paste mode (disable automated indentation)
 set paste
 
-" add tags search path
+" Add tags search path
 set tags=./tags,tags;$HOME
 
 
@@ -89,6 +96,7 @@ set lazyredraw
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO: make it so that it can switch between a light and a dark scheme
 syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
@@ -96,16 +104,17 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-" color scheme
+" Color scheme
+" TODO: dark schemes not working when terminal uses a light background
 try
-    colorscheme PaperColor
+    colorscheme PaperColor "onedark, zenburn
 catch
 endtry
 
-" use light or dark background
+" Use light or dark background
 set background=light
 
-" make the color scheme in tmux consistent with that of vim
+" Make the color scheme in tmux consistent with that of vim
 set term=screen-256color
 
 
@@ -157,7 +166,7 @@ set hlsearch
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,13 +200,13 @@ noremap <C-k> 30k
 " Disable highlight when <leader><cr> is pressed
 nnoremap <leader><cr> :noh<cr>
 
-" ctags related
+" Ctags related
 "noremap <C-]> g<C-]>
 "noremap <C-[> <C-t> " This doesn't work so well
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Management and Config
+" => Plugin Management
 """""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
@@ -205,19 +214,25 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " Keep Plugin commands between vundle#begin/end.
 call vundle#begin()
 
-" let Vundle manage Vundle, required
+" Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" color scheme papercolor-theme
+" Color scheme papercolor-theme, and zenburn
 Plugin 'NLKNguyen/papercolor-theme'
+"Plugin 'joshdick/onedark.vim'
+"Plugin 'jnurmine/Zenburn'
+
+" Status bar for vim
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Status bar for tmux
+Plugin 'edkolev/tmuxline.vim'
 
 " Automatically discover and update ctags files
 Plugin 'craigemery/vim-autotag'
 
 " Google code styles
-" Add maktaba and codefmt to the runtimepath.
-" Also add Glaive, which is used to configure codefmt's maktaba flags. See
-" `:help :Glaive` for usage.
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
@@ -239,7 +254,6 @@ filetype plugin indent on
 let g:goyo_width=105
 
 " Latex-Box
-" uncomment the following when Latex-Box is installed
 "let g:tex_flavor="latex"
 "let g:tex_fast="cmMprs"
 "let g:tex_conceal=""
@@ -256,6 +270,10 @@ function! HasPaste()
     endif
     return ''
 endfunction
+
+" Install patched powerline fonts and use use one of the fonts in terminal
+" Populate the |g:airline_symbols| dictionary with the powerline symbols
+let g:airline_powerline_fonts = 1
 
 " Automatic toggling between absolute and relative line number modes
 :augroup numbertoggle
