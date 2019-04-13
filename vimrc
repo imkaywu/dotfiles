@@ -107,9 +107,7 @@ endif
 " Color scheme
 " TODO: dark schemes not working when terminal uses a light background
 try
-    colorscheme PaperColor
-    "colorscheme onedark
-    "colorscheme zenburn
+    colorscheme PaperColor "onedark, zenburn
 catch
 endtry
 
@@ -232,12 +230,12 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 
 " Automatically discover and update ctags files
-"Plugin 'craigemery/vim-autotag'
+Plugin 'craigemery/vim-autotag'
 
 " Google code styles
-"Plugin 'google/vim-maktaba'
-"Plugin 'google/vim-codefmt'
-"Plugin 'google/vim-glaive'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+Plugin 'google/vim-glaive'
 
 " Goyo distraction-free writing
 Plugin 'junegunn/goyo.vim'
@@ -286,14 +284,14 @@ let g:airline_powerline_fonts = 1
 :augroup END
 
 " Automatic code formatting
-"augroup autoformat_settings
-"  autocmd FileType bzl AutoFormatBuffer buildifier
-"  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-"  autocmd FileType dart AutoFormatBuffer dartfmt
-"  autocmd FileType go AutoFormatBuffer gofmt
-"  autocmd FileType gn AutoFormatBuffer gn
-"  autocmd FileType html,css,json AutoFormatBuffer js-beautify
-"  autocmd FileType java AutoFormatBuffer google-java-format
-"  autocmd FileType python AutoFormatBuffer yapf
-"  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-"augroup END
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
