@@ -11,6 +11,7 @@
 alias tmux="tmux -2"
 
 # prepare environmental variables for ros related commands
+source /opt/ros/kinetic/setup.bash
 source ~/Documents/build_voyager/devel/setup.sh
 
 # prevent vim from hanging up if I mess up
@@ -18,3 +19,6 @@ vim() {
   [ -t 1 ] || { echo "Not starting vim without stdout to TTY!" >&2; return 1; }
   command vim "$@"
 }
+
+# speed up make build process.
+export PATH=/usr/lib/ccache:$PATH

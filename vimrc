@@ -61,9 +61,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Access the system clipboard
 set clipboard=unnamed
 
-" Enable paste mode (disable automated indentation)
-set paste
-
 " Add tags search path
 set tags=./tags,tags;$HOME
 
@@ -194,8 +191,8 @@ command W w !sudo tee % > /dev/null
 " Move up and down by paragraph
 noremap [ {
 noremap ] }
-noremap <C-j> 30j
-noremap <C-k> 30k
+noremap <C-j> 23j
+noremap <C-k> 23k
 
 " Disable highlight when <leader><cr> is pressed
 nnoremap <leader><cr> :noh<cr>
@@ -230,7 +227,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 
 " Automatically discover and update ctags files
-Plugin 'craigemery/vim-autotag'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " Google code styles
 Plugin 'google/vim-maktaba'
@@ -259,6 +256,9 @@ let g:goyo_width=105
 "let g:tex_conceal=""
 "let g:tex_fold_enabled=0
 "let g:tex_comment_nospell=1
+
+" Gutentags
+set statusline+=%{gutentags#statusline()}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -295,3 +295,27 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
+
+" Automatic toggling between paste and normal mode (disable automated indentation)
+function! WrapForTmux(s)
+    if !exists('$TMUX')
+        return a:s
+    endif
+
+    let tmux_start = "\<Esc>Ptmux;"
+    let tmux_end = "\<Esc>\\"
+
+    return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
