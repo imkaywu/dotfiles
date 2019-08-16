@@ -229,6 +229,9 @@ Plugin 'edkolev/tmuxline.vim'
 " Automatically discover and update ctags files
 Plugin 'ludovicchabant/vim-gutentags'
 
+" Nerdtree
+Plugin 'scrooloose/nerdtree'
+
 " Google code styles
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
@@ -259,6 +262,9 @@ let g:goyo_width=105
 
 " Gutentags
 set statusline+=%{gutentags#statusline()}
+
+" Nerdtree
+nmap <C-n> :NERDTreeToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
