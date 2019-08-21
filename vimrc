@@ -188,6 +188,9 @@ noremap <leader>W :wq<cr>
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
+" Open file (there is an invisible trailing whitespace)
+noremap <leader>e :e 
+
 " Move up and down by paragraph
 noremap [ {
 noremap ] }
