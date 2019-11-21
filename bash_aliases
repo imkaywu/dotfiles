@@ -2,7 +2,7 @@
 # Alias definitions.
 # This file contains all my additions.
 #=====================================
-# Add the following to a .bashrc
+# Add the following to a .bashrc to include this bash_aliases file.
 #if [ -f ~/.bash_aliases ]; then
 #    . ~/.bash_aliases
 #fi
@@ -11,8 +11,7 @@
 alias tmux="tmux -2"
 
 # prepare environmental variables for ros related commands
-source /opt/ros/kinetic/setup.bash
-source ~/Documents/build_voyager/devel/setup.sh
+source /opt/ros/melodic/setup.bash
 
 # prevent vim from hanging up if I mess up
 vim() {
@@ -20,5 +19,20 @@ vim() {
   command vim "$@"
 }
 
-# speed up make build process.
+# speed up make build process with ccache.
 export PATH=/usr/lib/ccache:$PATH
+
+# add ssh key passphrase upon login
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval `ssh-agent -s`
+    ssh-add /home/kai/.ssh/id_rsa
+fi
+
+# A list of aliases
+alias icemon='icemon -s 172.21.153.78'
+alias gb='git branch'
+alias gc='git checkout'
+alias gd='git diff'
+alias gD='git diff --staged'
+alias glog='git log --oneline'
+alias gs='git status'
