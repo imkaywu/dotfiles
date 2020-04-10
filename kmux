@@ -1,0 +1,80 @@
+#!/bin/sh
+
+tmux new-session \; \
+  rename-window 'stratocaster' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/voyager/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/voyager/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/voyager/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/voyager/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/voyager/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/voyager/build' C-m \; \
+  \
+  new-window -n 'eric clapton' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/eric-clapton/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/eric-clapton/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/eric-clapton/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/eric-clapton/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/eric-clapton/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/eric-clapton/build' C-m \; \
+  \
+  new-window -n 'george harrison' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/george-harrison/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/george-harrison/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/george-harrison/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/george-harrison/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/george-harrison/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/george-harrison/build' C-m \; \
+  \
+  new-window -n 'jimi hendrix' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/jimi-hendrix/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/jimi-hendrix/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/jimi-hendrix/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/jimi-hendrix/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/jimi-hendrix/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/jimi-hendrix/build' C-m \; \
+  \
+  new-window -n 'john mayer' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/john-mayer/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/john-mayer/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/john-mayer/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/john-mayer/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/john-mayer/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/john-mayer/build' C-m \; \
+  \
+  new-window -n 'stevie ray vaughan' \; \
+  split-window -h -p 67 \; \
+  split-window -h -p 50 \; \
+  select-pane -t 0 \; \
+  send-keys 'source ~/Documents/voyager-group/stevie-ray-vaughan/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/stevie-ray-vaughan/build' C-m \; \
+  select-pane -t 1 \; \
+  send-keys 'source ~/Documents/voyager-group/stevie-ray-vaughan/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/stevie-ray-vaughan/build' C-m \; \
+  select-pane -t 2 \; \
+  send-keys 'source ~/Documents/voyager-group/stevie-ray-vaughan/build/devel/setup.sh' C-m \; \
+  send-keys 'export CCACHE_BASEDIR=~/Documents/voyager-group/stevie-ray-vaughan/build' C-m \; \
