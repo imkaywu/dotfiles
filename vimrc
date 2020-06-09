@@ -274,10 +274,10 @@ nmap <C-n> :NERDTreeToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
+  if &paste
+      return 'PASTE MODE  '
+  endif
+  return ''
 endfunction
 
 " Install patched powerline fonts and use use one of the fonts in terminal
@@ -305,26 +305,19 @@ augroup autoformat_settings
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
-" Automatic toggling between paste and normal mode (disable automated indentation)
-function! WrapForTmux(s)
-    if !exists('$TMUX')
-        return a:s
-    endif
+" Automatic set paste mode when pasting in insert mode using bracketed paste 
+" mode of the terminal emulator. (disable automated indentation)
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
 
-    let tmux_start = "\<Esc>Ptmux;"
-    let tmux_end = "\<Esc>\\"
-
-    return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-
+function! XTermPasteBegin(ret)
+  set pastetoggle=<Esc>[201~
+  set paste
+  return a:ret
 endfunction
 
-let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-
-function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-endfunction
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+map <expr> <Esc>[200~ XTermPasteBegin("i")
+imap <expr> <Esc>[200~ XTermPasteBegin("")
+vmap <expr> <Esc>[200~ XTermPasteBegin("c")
+cmap <Esc>[200~ <nop>
+cmap <Esc>[201~ <nop>
