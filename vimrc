@@ -122,6 +122,7 @@ set term=screen-256color
 set nobackup
 set nowritebackup
 set noswapfile
+set undodir=~/.vim/undodir
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
@@ -186,7 +187,7 @@ noremap <leader>W :wq<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 " Open file (there is an invisible trailing whitespace)
 noremap <leader>e :e 
@@ -208,43 +209,39 @@ nnoremap <leader><cr> :noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Management
 """""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" Keep Plugin commands between vundle#begin/end.
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" Let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" CoC
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Color scheme papercolor-theme, and zenburn
-Plugin 'NLKNguyen/papercolor-theme'
-"Plugin 'joshdick/onedark.vim'
-"Plugin 'jnurmine/Zenburn'
+Plug 'NLKNguyen/papercolor-theme'
+"Plug 'joshdick/onedark.vim'
+"Plug 'jnurmine/Zenburn'
 
 " Status bar for vim
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Status bar for tmux
-Plugin 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 
 " Automatically discover and update ctags files
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Google code styles
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
-Plugin 'google/vim-glaive'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 " Goyo distraction-free writing
-Plugin 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 " Latex-Box
-"Plugin 'LaTex-Box-Team/LaTex-Box'
+"Plug 'LaTex-Box-Team/LaTex-Box'
 
-call vundle#end()
-filetype plugin indent on
+" Initialize plugin system
+call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -263,15 +260,24 @@ let g:goyo_width=105
 " Gutentags
 set statusline+=%{gutentags#statusline()}
 
+" CoC
+let g:coc_disable_startup_warning = 1
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
 function! HasPaste()
-  if &paste
-    return 'PASTE MODE  '
-  endif
-  return ''
+    if &paste
+      return 'PASTE MODE  '
+    endif
+    return ''
 endfunction
 
 " Install patched powerline fonts and use one of the fonts in terminal
@@ -288,15 +294,15 @@ let g:airline_powerline_fonts = 1
 
 " Automatic code formatting
 augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+    autocmd FileType bzl AutoFormatBuffer buildifier
+    autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType gn AutoFormatBuffer gn
+    "autocmd FileType html,css,json AutoFormatBuffer js-beautify
+    autocmd FileType java AutoFormatBuffer google-java-format
+    autocmd FileType python AutoFormatBuffer yapf
+    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
 " Automatic set paste mode when pasting in insert mode using bracketed paste 
@@ -305,9 +311,9 @@ let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
 
 function! XTermPasteBegin(ret)
-  set pastetoggle=<Esc>[201~
-  set paste
-  return a:ret
+    set pastetoggle=<Esc>[201~
+    set paste
+    return a:ret
 endfunction
 
 map <expr> <Esc>[200~ XTermPasteBegin("i")
