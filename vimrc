@@ -232,9 +232,6 @@ Plugin 'edkolev/tmuxline.vim'
 " Automatically discover and update ctags files
 Plugin 'ludovicchabant/vim-gutentags'
 
-" Nerdtree
-Plugin 'scrooloose/nerdtree'
-
 " Google code styles
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmt'
@@ -266,21 +263,18 @@ let g:goyo_width=105
 " Gutentags
 set statusline+=%{gutentags#statusline()}
 
-" Nerdtree
-nmap <C-n> :NERDTreeToggle<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
 function! HasPaste()
   if &paste
-      return 'PASTE MODE  '
+    return 'PASTE MODE  '
   endif
   return ''
 endfunction
 
-" Install patched powerline fonts and use use one of the fonts in terminal
+" Install patched powerline fonts and use one of the fonts in terminal
 let g:airline_theme='papercolor'
 " Populate the |g:airline_symbols| dictionary with the powerline symbols
 let g:airline_powerline_fonts = 1
