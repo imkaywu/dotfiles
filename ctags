@@ -29,5 +29,4 @@
 --exclude=tests
 --exclude=.tmp
 --exclude=*bundle.*
---exclude=build_voyager
---exclude=\*build\*
+--exclude=build
