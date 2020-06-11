@@ -287,14 +287,6 @@ let g:fzf_preview_window = 'right:60%'
 "let g:tex_fold_enabled=0
 "let g:tex_comment_nospell=1
 
-" CoC
-let g:coc_disable_startup_warning = 1
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
