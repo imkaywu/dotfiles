@@ -106,7 +106,7 @@ endif
 " Color scheme
 " TODO: dark schemes not working when terminal uses a light background
 try
-    colorscheme PaperColor "onedark, zenburn
+    colorscheme PaperColor
 catch
 endtry
 
@@ -222,8 +222,6 @@ Plug 'junegunn/fzf.vim'
 
 " Color scheme papercolor-theme, and zenburn
 Plug 'NLKNguyen/papercolor-theme'
-"Plug 'joshdick/onedark.vim'
-"Plug 'jnurmine/Zenburn'
 
 " Status bar for vim
 Plug 'vim-airline/vim-airline'
@@ -253,6 +251,11 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Config
 """""""""""""""""""""""""""""""""""""""""""""""""""
+" Install patched powerline fonts and use one of the fonts in terminal
+let g:airline_theme='papercolor'
+" Populate the |g:airline_symbols| dictionary with the powerline symbols
+let g:airline_powerline_fonts = 1
+
 " Goyo
 let g:goyo_width=105
 
@@ -298,11 +301,6 @@ function! HasPaste()
     endif
     return ''
 endfunction
-
-" Install patched powerline fonts and use one of the fonts in terminal
-let g:airline_theme='papercolor'
-" Populate the |g:airline_symbols| dictionary with the powerline symbols
-let g:airline_powerline_fonts = 1
 
 " Automatic toggling between absolute and relative line number modes
 :augroup numbertoggle
