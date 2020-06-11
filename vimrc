@@ -214,6 +214,10 @@ call plug#begin('~/.vim/plugged')
 " CoC
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Color scheme papercolor-theme, and zenburn
 Plug 'NLKNguyen/papercolor-theme'
 "Plug 'joshdick/onedark.vim'
@@ -249,6 +253,10 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo
 let g:goyo_width=105
+
+" FZF
+" Always enable preview window on the right with 60% width
+let g:fzf_preview_window = 'right:60%'
 
 " Latex-Box
 "let g:tex_flavor="latex"
