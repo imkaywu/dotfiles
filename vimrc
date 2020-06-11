@@ -207,6 +207,41 @@ nnoremap <leader><cr> :noh<cr>
 "noremap <C-]> g<C-]>
 "noremap <C-[> <C-t> " This doesn't work so well
 
+" FZF
+" File finder
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>F :Files<CR>
+" Buffer finder
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
+" Tag finder
+nnoremap <leader>t :BTags<CR>
+nnoremap <leader>T :Tags<CR>
+" Line finder
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>L :Lines<CR>
+nnoremap <leader>' :Marks<CR>
+" Project finder
+nnoremap <leader>/ :Ag<Space>
+nnoremap <leader>/ :Rg<Space>
+" Fuzzy search defined commands
+nnoremap <leader>C :Commands<CR>
+" Fuzzy search through command history
+nnoremap <leader>: :History:<CR>
+" Fuzzy search key mappings
+nnoremap <leader>M :Maps<CR>
+" Fuzzy search filetype syntaxes,
+nnoremap <leader>s :Filetypes<CR>
+nnoremap <leader>S :Snippets<CR>
+" Help Finder
+nnoremap <leader><leader>h :Helptags!<CR>
+
+" CoC GoTo code navigation.
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Management
@@ -261,19 +296,15 @@ let g:goyo_width=105
 
 " Gutentags
 set statusline+=%{gutentags#statusline()}
-
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
 " The tag file that Gutentags creates and manages.
 let g:gutentags_ctags_tagfile = '.tags'
-
 " Specifies a directory in which to create all the tags files, instead of
 " writing them at the root of each project.
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
-
 " Ctags related configurations
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
@@ -282,6 +313,9 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " FZF
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
+
+" CoC
+let g:coc_disable_startup_warning = 1
 
 " Latex-Box
 "let g:tex_flavor="latex"
