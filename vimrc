@@ -62,6 +62,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set clipboard=unnamed
 
 " Add tags search path
+" When a tag file name starts with './', the '.' is replaced with the path of the
+" current file. 
 set tags=./tags,tags;$HOME
 
 
@@ -254,6 +256,26 @@ call plug#end()
 " Goyo
 let g:goyo_width=105
 
+" Gutentags
+set statusline+=%{gutentags#statusline()}
+
+" A list of project root marker that determines if a file should be managed by
+" Gutentags.
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" The tag file that Gutentags creates and manages.
+let g:gutentags_ctags_tagfile = '.tags'
+
+" Specifies a directory in which to create all the tags files, instead of
+" writing them at the root of each project.
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" Ctags related configurations
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
 " FZF
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
@@ -264,9 +286,6 @@ let g:fzf_preview_window = 'right:60%'
 "let g:tex_conceal=""
 "let g:tex_fold_enabled=0
 "let g:tex_comment_nospell=1
-
-" Gutentags
-set statusline+=%{gutentags#statusline()}
 
 " CoC
 let g:coc_disable_startup_warning = 1
