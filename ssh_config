@@ -1,0 +1,17 @@
+Host dev
+    Hostname 172.22.50.243
+    User wukai
+    ServerAliveInterval 120
+    ServerAliveCountMax 256
+
+# Company github
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+
+# Personal github
+Host github.com-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_personal
