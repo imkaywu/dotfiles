@@ -22,6 +22,12 @@ vim() {
 # speed up make build process with ccache.
 export PATH=/usr/lib/ccache:$PATH
 
+# yapf dir.
+export PATH=$HOME/.local/bin:$PATH
+
+# limit job number.
+export NUM_MAKE_JOBS=15
+
 # TODO: use direnv to handle the following environment variables.
 #source ~/Documents/voyager-group/voyager/build/devel/setup.sh
 #export CCACHE_BASEDIR=~/Documents/voyager-group/voyager/build
