@@ -36,6 +36,7 @@ export NUM_MAKE_JOBS=15
 #if [ -z "$SSH_AUTH_SOCK" ]; then
 #    eval `ssh-agent -s`
 #    ssh-add /home/kai/.ssh/id_rsa
+#    ssh-add /home/kai/.ssh/id_rsa_personal
 #fi
 
 # A list of aliases
