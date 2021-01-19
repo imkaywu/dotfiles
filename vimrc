@@ -213,7 +213,6 @@ nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>F :Files<CR>
 " Buffer finder
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :History<CR>
 " Tag finder
 nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
@@ -221,20 +220,22 @@ nnoremap <leader>T :Tags<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>L :Lines<CR>
 nnoremap <leader>' :Marks<CR>
-" Project finder
-nnoremap <leader>/ :Ag<Space>
-nnoremap <leader>/ :Rg<Space>
+" Project finder (Install the Silver Searcher or ripgrep)
+nnoremap <leader>/ :Ag<CR>
+nnoremap <leader>/ :Rg<CR>
 " Fuzzy search defined commands
 nnoremap <leader>C :Commands<CR>
 " Fuzzy search through command history
-nnoremap <leader>: :History:<CR>
+nnoremap <leader>h :History<CR>
+nnoremap <leader>h: :History:<CR>
+nnoremap <leader>h/ :History/<CR>
 " Fuzzy search key mappings
 nnoremap <leader>M :Maps<CR>
 " Fuzzy search filetype syntaxes,
 nnoremap <leader>s :Filetypes<CR>
 nnoremap <leader>S :Snippets<CR>
 " Help Finder
-nnoremap <leader><leader>h :Helptags!<CR>
+nnoremap <leader>H :Helptags!<CR>
 
 " CoC GoTo code navigation.
 nnoremap <silent> gd <Plug>(coc-definition)
@@ -311,8 +312,12 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 " FZF
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
+" Always enable preview window on the top with 40% height.
+let g:fzf_preview_window = ['up:40%', 'ctrl-/']
+" Rg would NOT consider filename as a match in Vim.
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 " CoC
 let g:coc_disable_startup_warning = 1
