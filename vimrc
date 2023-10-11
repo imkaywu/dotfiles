@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
 "     Kai Wu
-"     https://imkaywu.github.io - kaywu@ece.ubc.ca
+"     https://imkaywu.github.io
 " Section:
 "     -> General
 "     -> VIM user interface
@@ -237,20 +237,11 @@ nnoremap <leader>S :Snippets<CR>
 " Help Finder
 nnoremap <leader>H :Helptags!<CR>
 
-" CoC GoTo code navigation.
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Management
 """""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-
-" CoC
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -276,9 +267,6 @@ Plug 'google/vim-glaive'
 
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
-
-" Latex-Box
-"Plug 'LaTex-Box-Team/LaTex-Box'
 
 " Initialize plugin system
 call plug#end()
@@ -318,16 +306,6 @@ let g:fzf_preview_window = ['up:40%', 'ctrl-/']
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-
-" CoC
-let g:coc_disable_startup_warning = 1
-
-" Latex-Box
-"let g:tex_flavor="latex"
-"let g:tex_fast="cmMprs"
-"let g:tex_conceal=""
-"let g:tex_fold_enabled=0
-"let g:tex_comment_nospell=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
