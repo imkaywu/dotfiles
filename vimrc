@@ -268,6 +268,9 @@ Plug 'google/vim-glaive'
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
 
+" vim-go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Initialize plugin system
 call plug#end()
 
