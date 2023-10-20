@@ -271,6 +271,9 @@ Plug 'junegunn/goyo.vim'
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" TagBar
+Plug 'preservim/tagbar'
+
 " Initialize plugin system
 call plug#end()
 
@@ -301,6 +304,12 @@ let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+" A customized function disabling certain file types.
+" Copied from https://github.com/ludovicchabant/vim-gutentags/issues/88
+function! MyCustomGutentagsEnableFunc(path) abort
+    return fnamemodify(a:path, ':e') != 'go'
+endfunction
+let g:gutentags_enabled_user_func = 'MyCustomGutentagsEnableFunc'
 
 " FZF
 " Always enable preview window on the top with 40% height.
@@ -310,6 +319,45 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+" vim-go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+
+" TagBar (config copied from gotags github repo)
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -336,7 +384,7 @@ augroup autoformat_settings
     autocmd FileType dart AutoFormatBuffer dartfmt
     autocmd FileType go AutoFormatBuffer gofmt
     autocmd FileType gn AutoFormatBuffer gn
-    "autocmd FileType html,css,json AutoFormatBuffer js-beautify
+    autocmd FileType html,css,json AutoFormatBuffer js-beautify
     autocmd FileType java AutoFormatBuffer google-java-format
     autocmd FileType python AutoFormatBuffer yapf
     " Alternative: autocmd FileType python AutoFormatBuffer autopep8
