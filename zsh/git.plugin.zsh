@@ -16,8 +16,8 @@ alias gp='git push'
 compdef _git gp=git-push
 gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
-gdvs() { git diff --staged "$@" | view - }
-compdef _git gdvs=git-diff
+gdsv() { git diff --staged "$@" | view - }
+compdef _git gdsv=git-diff
 alias gc='git commit -v'
 compdef _git gc=git-commit
 alias gca='git commit -v -a'
@@ -60,7 +60,6 @@ function current_branch() {
 }
 
 function current_repository() {
-
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   echo $(git remote -v | cut -d':' -f 2)
 }
