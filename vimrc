@@ -136,10 +136,10 @@ set autoindent
 set smartindent
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " Use spaces instead of tabs
 set expandtab
@@ -166,7 +166,7 @@ set hlsearch
 set laststatus=2
 
 " Format the status line
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -328,6 +328,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+let g:go_fmt_command = "goimports" " autoupdate import
+let g:go_fmt_autosave = 1          " autosave on updates
 
 " TagBar (config copied from gotags github repo)
 nmap <F8> :TagbarToggle<CR>
