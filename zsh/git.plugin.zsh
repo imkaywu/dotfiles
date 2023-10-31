@@ -8,6 +8,8 @@ alias g='git'
 compdef g=git
 alias gst='git status'
 compdef _git gst=git-status
+alias gss='git status -s'
+compdef _git gss=git-status
 alias gl='git pull'
 compdef _git gl=git-pull
 alias gup='git fetch && git rebase'
@@ -39,14 +41,16 @@ alias glgs='git log --stat --max-count=5'
 compdef _git glg=git-log
 alias glgg='git log --graph --max-count=5'
 compdef _git glgg=git-log
-alias gss='git status -s'
-compdef _git gss=git-status
 alias ga='git add'
+compdef _git ga=git-add
+alias gap='git add -p'
 compdef _git ga=git-add
 alias grb='git rebase'
 compdef _git grb=git-rebase
 alias gm='git merge'
 compdef _git gm=git-merge
+alias gcl='git clone'
+compdef _git gcl=git-clone
 alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
 

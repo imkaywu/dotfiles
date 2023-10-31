@@ -19,7 +19,6 @@
 --exclude=\*.cache
 --exclude=\*.dll
 --exclude=\*.pdb
---exclude=\*.go
 --exclude=tags
 --exclude=cscope.\*
 --exclude=\*.tar.\*
