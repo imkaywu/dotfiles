@@ -328,7 +328,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
-let g:go_fmt_command = "goimports" " autoupdate import
+let g:go_fmt_command = "gofmt"     " autoupdate import
 let g:go_fmt_autosave = 1          " autosave on updates
 
 " TagBar (config copied from gotags github repo)
