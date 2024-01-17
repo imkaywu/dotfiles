@@ -237,6 +237,9 @@ nnoremap <leader>S :Snippets<CR>
 " Help Finder
 nnoremap <leader>H :Helptags!<CR>
 
+" VimWiki
+nmap <Leader>tt <Plug>VimwikiToggleListItem
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Management
@@ -260,6 +263,9 @@ Plug 'edkolev/tmuxline.vim'
 " Automatically discover and update ctags files
 Plug 'ludovicchabant/vim-gutentags'
 
+" VimWiki
+Plug 'vimwiki/vimwiki'
+
 " Google code styles
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -282,9 +288,6 @@ call plug#end()
 let g:airline_theme='papercolor'
 " Populate the |g:airline_symbols| dictionary with the powerline symbols
 let g:airline_powerline_fonts = 1
-
-" Goyo
-let g:goyo_width=105
 
 " Gutentags
 set statusline+=%{gutentags#statusline()}
@@ -315,6 +318,18 @@ let g:fzf_preview_window = ['up:40%', 'ctrl-/']
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+" VimWiki
+let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {}
+let g:vimwiki_listsyms = ' .oOX'
+let wiki_1 = {'path': '~/Documents/git-repos/bullet-journal/2023', 'syntax': 'markdown', 'ext': 'md'}
+let wiki_2 = deepcopy(wiki_1)
+let wiki_2.path = '~/Documents/git-repos/bullet-journal/2024'
+let g:vimwiki_list = [wiki_1, wiki_2]
+
+" Goyo
+let g:goyo_width=105
 
 " vim-go
 let g:go_highlight_types = 1
