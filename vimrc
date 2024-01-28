@@ -98,6 +98,10 @@ set lazyredraw
 " TODO: make it so that it can switch between a light and a dark scheme
 syntax enable
 
+" Use new regular expression engine. Otherwise Typescript syntax highlighting
+" will be painfully slow
+set re=0
+
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
