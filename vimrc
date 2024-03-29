@@ -299,7 +299,8 @@ set statusline+=%{gutentags#statusline()}
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 " Exclude file types and directories.
-let g:gutentags_exclude = ['\.go$', 'build/']
+" https://pavelespinal.com/short-articles/vim-gutentags-ignoring-exclude-parameters-from-ctags/
+let g:gutentags_ctags_exclude = ['*.go', '*/build/*']
 " The tag file that Gutentags creates and manages.
 let g:gutentags_ctags_tagfile = '.tags'
 " Specifies a directory in which to create all the tags files, instead of
@@ -310,6 +311,8 @@ let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+" Print debug information
+let g:gutentags_trace = 0
 
 " FZF
 " Always enable preview window on the top with 40% height.
