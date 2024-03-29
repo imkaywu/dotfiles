@@ -298,6 +298,8 @@ set statusline+=%{gutentags#statusline()}
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+" Exclude file types and directories.
+let g:gutentags_exclude = ['\.go$', 'build/']
 " The tag file that Gutentags creates and manages.
 let g:gutentags_ctags_tagfile = '.tags'
 " Specifies a directory in which to create all the tags files, instead of
@@ -308,12 +310,6 @@ let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-" A customized function disabling certain file types.
-" Copied from https://github.com/ludovicchabant/vim-gutentags/issues/88
-function! MyCustomGutentagsEnableFunc(path) abort
-    return fnamemodify(a:path, ':e') != 'go'
-endfunction
-let g:gutentags_enabled_user_func = 'MyCustomGutentagsEnableFunc'
 
 " FZF
 " Always enable preview window on the top with 40% height.
