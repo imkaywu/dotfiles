@@ -281,6 +281,9 @@ Plug 'junegunn/goyo.vim'
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Emmet
+Plug 'mattn/emmet-vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -345,6 +348,10 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_fmt_command = "gofmt"     " autoupdate import
 let g:go_fmt_autosave = 1          " autosave on updates
+
+" Emmet
+let g:user_emmet_leader_key='<C-M>'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
