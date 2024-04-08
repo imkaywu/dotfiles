@@ -51,8 +51,10 @@ alias gm='git merge'
 compdef _git gm=git-merge
 alias gcl='git clone'
 compdef _git gcl=git-clone
+alias gsh='git stash'
+compdef _git gsh=git-stash
 alias grh='git reset HEAD'
-alias grhh='git reset HEAD --hard'
+alias grhh='git reset --hard HEAD'
 
 #
 # Will return the current branch name
