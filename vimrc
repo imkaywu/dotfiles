@@ -242,7 +242,10 @@ nnoremap <leader>S :Snippets<CR>
 nnoremap <leader>H :Helptags!<CR>
 
 " VimWiki
-nmap <Leader>tt <Plug>VimwikiToggleListItem
+nmap <Leader>tl <Plug>VimwikiToggleListItem
+nmap <Leader>tn <Plug>VimwikiIncrementListItem
+nmap <Leader>tp <Plug>VimwikiDecrementListItem
+nmap <Leader>tx <Plug>VimwikiToggleRejectedListItem
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -328,7 +331,7 @@ command! -bang -nargs=* Rg
 " VimWiki
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
-let g:vimwiki_listsyms = ' .oOX'
+let g:vimwiki_listsyms = '✗○◐●✓'
 let wiki_1 = {'path': '~/Documents/git-repos/bullet-journal/2023', 'syntax': 'markdown', 'ext': 'md'}
 let wiki_2 = deepcopy(wiki_1)
 let wiki_2.path = '~/Documents/git-repos/bullet-journal/2024'
