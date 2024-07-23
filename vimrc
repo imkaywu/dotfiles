@@ -331,11 +331,13 @@ command! -bang -nargs=* Rg
 " VimWiki
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
-let g:vimwiki_listsyms = '✗○◐●✓'
-let wiki_1 = {'path': '~/Documents/git-repos/bullet-journal/2023', 'syntax': 'markdown', 'ext': 'md'}
+let g:vimwiki_listsyms = ' .oOX'
+let wiki_1 = {'path': '~/Documents/git-repos/bullet-journal/game-dev', 'syntax': 'markdown', 'ext': 'md'}
 let wiki_2 = deepcopy(wiki_1)
-let wiki_2.path = '~/Documents/git-repos/bullet-journal/2024'
-let g:vimwiki_list = [wiki_1, wiki_2]
+let wiki_2.path = '~/Documents/git-repos/bullet-journal/2023'
+let wiki_3 = deepcopy(wiki_1)
+let wiki_3.path = '~/Documents/git-repos/bullet-journal/2024'
+let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
 
 " Goyo
 let g:goyo_width=105
