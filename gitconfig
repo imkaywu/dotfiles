@@ -1,0 +1,10 @@
+# root directory of company repos with trailing slash
+[includeIf "gitdir:<company-repo-path>"]
+    path = ~/.gitconfig-company
+
+# root directory of personal repos with trailing slash
+[includeIf "gitdir:<personal-repo-path>"]
+    path = ~/.gitconfig-personal
+
+# cd <repo>
+# git config --show-origin --get user.name
