@@ -170,7 +170,8 @@ set hlsearch
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ %{LinterStatus()}\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -247,6 +248,9 @@ nmap <Leader>tn <Plug>VimwikiIncrementListItem
 nmap <Leader>tp <Plug>VimwikiDecrementListItem
 nmap <Leader>tx <Plug>VimwikiToggleRejectedListItem
 
+" ALE
+" Toggle ALE on and off
+nmap <silent> <leader>a :ALEToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Management
@@ -273,10 +277,8 @@ Plug 'ludovicchabant/vim-gutentags'
 " VimWiki
 Plug 'vimwiki/vimwiki'
 
-" Google code styles
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
+" ALE
+Plug 'dense-analysis/ale'
 
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
@@ -298,6 +300,8 @@ call plug#end()
 let g:airline_theme='papercolor'
 " Populate the |g:airline_symbols| dictionary with the powerline symbols
 let g:airline_powerline_fonts = 1
+" Displaying ALE error information in the status bar
+let g:airline#extensions#ale#enabled = 1
 
 " Gutentags
 set statusline+=%{gutentags#statusline()}
@@ -319,6 +323,40 @@ let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " Print debug information
 let g:gutentags_trace = 0
+
+"ALE
+" Enable ALE
+let g:ale_enabled = 1
+let g:ale_disable_lsp = 1
+" Run linters when files are saved (default), disable other modes
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+" Run fixers when files are saved.
+let g:ale_fix_on_save = 1
+" Display errors and warnings where the cursor currently lies.
+let g:ale_virtualtext_cursor = 'disabled'
+" Echo message format
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" Linters and fixers configs
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy', 'pylint', 'pycodestyle'],
+\   'cpp': ['gcc', 'clangtidy'],
+\}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black', 'isort'],
+\   'cpp': ['clang-format'],
+\}
+" Specific options for python and cpp linters and fixers
+let g:ale_python_black_options='--line-length=80'
+let g:ale_cpp_gcc_options = '-std=c++17 -Wall -Wextra -pedantic'
+let g:ale_cpp_clangtidy_options = '-checks=*'
 
 " FZF
 " Always enable preview window on the top with 40% height.
@@ -376,20 +414,21 @@ endfunction
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
 
-" Automatic code formatting
-augroup autoformat_settings
-    autocmd FileType bzl AutoFormatBuffer buildifier
-    autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-    autocmd FileType dart AutoFormatBuffer dartfmt
-    autocmd FileType go AutoFormatBuffer gofmt
-    autocmd FileType gn AutoFormatBuffer gn
-    autocmd FileType html,css,json AutoFormatBuffer js-beautify
-    autocmd FileType java AutoFormatBuffer google-java-format
-    autocmd FileType python AutoFormatBuffer yapf
-    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-augroup END
+" ALE lint status in airline
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
 
-" Automatic set paste mode when pasting in insert mode using bracketed paste 
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+" Automatic set paste mode when pasting in insert mode using bracketed paste
 " mode of the terminal emulator. (disable automated indentation)
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
