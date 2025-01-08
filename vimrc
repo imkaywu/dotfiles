@@ -370,12 +370,19 @@ command! -bang -nargs=* Rg
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
 let g:vimwiki_listsyms = ' .oOX'
-let wiki_1 = {'path': '~/Documents/git-repos/bullet-journal/game-dev', 'syntax': 'markdown', 'ext': 'md'}
-let wiki_2 = deepcopy(wiki_1)
-let wiki_2.path = '~/Documents/git-repos/bullet-journal/2023'
-let wiki_3 = deepcopy(wiki_1)
-let wiki_3.path = '~/Documents/git-repos/bullet-journal/2024'
-let g:vimwiki_list = [wiki_1, wiki_2, wiki_3]
+" Has to be put before function call, otherwise, function not defined error
+function! GenerateVimwikiList(base_path)
+    let l:wiki_list = []
+    let l:base_path = expand(a:base_path)  " Expand to absolute path
+    for l:dir in glob(l:base_path . '/*', 1, 1)
+        if isdirectory(l:dir)
+            call add(l:wiki_list, {'path': l:dir, 'syntax': 'markdown', 'ext': 'md'})
+        endif
+    endfor
+    return l:wiki_list
+endfunction
+let g:vimwiki_list = GenerateVimwikiList("~/Documents/git-repos/bullet-journal")
+
 
 " Goyo
 let g:goyo_width=105
@@ -391,6 +398,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_fmt_command = "gofmt"     " autoupdate import
 let g:go_fmt_autosave = 1          " autosave on updates
+let g:go_version_warning = 0
 
 " Emmet
 let g:user_emmet_leader_key='<C-M>'
