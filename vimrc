@@ -10,6 +10,7 @@
 "     -> Text, tab and indent related
 "     -> Search settings
 "     -> Status line
+"     -> Auto-completion
 "     -> Mapping
 "     -> Plugin Management
 "     -> Plugin Config
@@ -173,6 +174,14 @@ set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ %{LinterStatus()}\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Auto-completion
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" Show a completion popup menu
+set completeopt=menuone,noinsert,noselect
+" Reduce messages during completion
+set shortmess+=c
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mapping
@@ -286,8 +295,8 @@ Plug 'junegunn/goyo.vim'
 " vim-go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Emmet
-Plug 'mattn/emmet-vim'
+" allow using tab for insert completion
+Plug 'ervandew/supertab'
 
 " Initialize plugin system
 call plug#end()
@@ -308,6 +317,10 @@ set statusline+=%{gutentags#statusline()}
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+" Add STL include path for macOS CommandLineTools
+let g:gutentags_additional_paths = [
+    \ '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
+    \ ]
 " Exclude file types and directories.
 " https://pavelespinal.com/short-articles/vim-gutentags-ignoring-exclude-parameters-from-ctags/
 let g:gutentags_ctags_exclude = ['*.go', '*/build/*']
@@ -399,9 +412,6 @@ let g:go_highlight_generate_tags = 1
 let g:go_fmt_command = "gofmt"     " autoupdate import
 let g:go_fmt_autosave = 1          " autosave on updates
 let g:go_version_warning = 0
-
-" Emmet
-let g:user_emmet_leader_key='<C-M>'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
