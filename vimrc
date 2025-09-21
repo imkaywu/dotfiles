@@ -179,6 +179,7 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ %{LinterStatus()}\ \ CWD:\ %r%{getcw
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Show a completion popup menu
 set completeopt=menuone,noinsert,noselect
+
 " Reduce messages during completion
 set shortmess+=c
 
@@ -298,6 +299,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " allow using tab for insert completion
 Plug 'ervandew/supertab'
 
+" Allow C++ omni-completion
+Plug 'Rip-Rip/clang_complete'
+
 " Initialize plugin system
 call plug#end()
 
@@ -317,13 +321,22 @@ set statusline+=%{gutentags#statusline()}
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-" Add STL include path for macOS CommandLineTools
+let g:gutentags_ctags_executable = '/opt/homebrew/bin/ctags'
+" Add STL include path for macOS CommandLineTools (unverified)
 let g:gutentags_additional_paths = [
     \ '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
     \ ]
-" Exclude file types and directories.
+" Exclude file types and directories (unverified)
 " https://pavelespinal.com/short-articles/vim-gutentags-ignoring-exclude-parameters-from-ctags/
-let g:gutentags_ctags_exclude = ['*.go', '*/build/*']
+let g:gutentags_ctags_exclude = [
+    \ '*.md',
+    \ '*.txt',
+    \ '*.gd',
+    \ '*.sh',
+    \ '*.go',
+    \ '*/.git/*',
+    \ '*/build/*'
+    \ ]
 " The tag file that Gutentags creates and manages.
 let g:gutentags_ctags_tagfile = '.tags'
 " Specifies a directory in which to create all the tags files, instead of
@@ -379,6 +392,20 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+" SuperTab
+let g:SuperTabDefaultCompletionType = "<C-x><C-o>" " use <Tab> for completion
+
+" Clang-Complete
+" Enable clang_complete
+let g:clang_complete_auto = 1          " auto popup when typing
+" C/C++ completion (clang-complete needs libclang for semantic completion)
+" libclang.dylib (on macOS) or libclang.so (on Linux).
+let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+" Add system include dirs for macOS libc++ STL
+let g:clang_user_options = '-std=c++17'
+let g:clang_user_options .= ' -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
+let g:clang_user_options .= ' -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include'
+
 " VimWiki
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}
@@ -395,7 +422,6 @@ function! GenerateVimwikiList(base_path)
     return l:wiki_list
 endfunction
 let g:vimwiki_list = GenerateVimwikiList("~/Documents/git-repos/bullet-journal")
-
 
 " Goyo
 let g:goyo_width=105
