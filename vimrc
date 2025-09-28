@@ -183,6 +183,10 @@ set completeopt=menuone,noinsert,noselect
 " Reduce messages during completion
 set shortmess+=c
 
+" Omni completion uses Vim’s built-in syntax-based completion for C/C++.
+autocmd FileType c,cpp setlocal omnifunc=clang_complete#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => Mapping
