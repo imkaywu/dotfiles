@@ -358,35 +358,32 @@ let g:gutentags_trace = 0
 " Enable ALE
 let g:ale_enabled = 1
 let g:ale_disable_lsp = 1
-" Run linters when files are saved (default), disable other modes
+" Linters
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-" Only run linters named in ale_linters settings.
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 1
 let g:ale_linters_explicit = 1
-" Run fixers when files are saved.
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy'],
+\   'cpp': ['clang', 'clangtidy'],
+\}
+let g:ale_cpp_clang_options = '-std=c++20 -Wall -Wextra -pedantic'
+let g:ale_cpp_clangtidy_options = '-checks=*'
+" Fixers
 let g:ale_fix_on_save = 1
-" Display errors and warnings where the cursor currently lies.
-let g:ale_virtualtext_cursor = 'disabled'
-" Echo message format
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['isort', 'black'],
+\   'cpp': ['clang-format'],
+\}
+let g:ale_python_isort_options='--profile black'
+let g:ale_python_black_options='--line-length=80'
+" UI
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" Linters and fixers configs
-let g:ale_linters = {
-\   'python': ['flake8', 'mypy', 'pylint', 'pycodestyle'],
-\   'cpp': ['gcc', 'clangtidy'],
-\}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black', 'isort'],
-\   'cpp': ['clang-format'],
-\}
-" Specific options for python and cpp linters and fixers
-let g:ale_python_black_options='--line-length=80'
-let g:ale_cpp_gcc_options = '-std=c++17 -Wall -Wextra -pedantic'
-let g:ale_cpp_clangtidy_options = '-checks=*'
+let g:ale_virtualtext_cursor = 'disabled' " Display errors and warnings where the cursor lies.
 
 " FZF
 " Always enable preview window on the top with 40% height.
