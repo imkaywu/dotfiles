@@ -297,9 +297,6 @@ Plug 'dense-analysis/ale'
 " Goyo distraction-free writing
 Plug 'junegunn/goyo.vim'
 
-" vim-go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 " allow using tab for insert completion
 Plug 'ervandew/supertab'
 
@@ -426,19 +423,6 @@ let g:vimwiki_list = GenerateVimwikiList("~/Documents/git-repos/bullet-journal")
 
 " Goyo
 let g:goyo_width=105
-
-" vim-go
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_fmt_command = "gofmt"     " autoupdate import
-let g:go_fmt_autosave = 1          " autosave on updates
-let g:go_version_warning = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
