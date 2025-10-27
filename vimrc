@@ -322,21 +322,15 @@ set statusline+=%{gutentags#statusline()}
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-let g:gutentags_ctags_executable = '/opt/homebrew/bin/ctags'
-" Add STL include path for macOS CommandLineTools (unverified)
-let g:gutentags_additional_paths = [
-    \ '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
-    \ ]
-" Exclude file types and directories (unverified)
+let g:gutentags_ctags_executable = 'ctags'
+" Use explicit file list
+let g:gutentags_file_list_command = 'find . -type f \( -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.hpp" -o -name "*.h" -o -name "*.py" \) -not -path "./.git/*" -not -path "./venv/*"'
+" Exclude directories
 " https://pavelespinal.com/short-articles/vim-gutentags-ignoring-exclude-parameters-from-ctags/
 let g:gutentags_ctags_exclude = [
-    \ '*.md',
-    \ '*.txt',
-    \ '*.gd',
-    \ '*.sh',
-    \ '*.go',
-    \ '*/.git/*',
-    \ '*/build/*'
+    \ '.git/*',
+    \ 'build/*',
+    \ '__pycache__/*'
     \ ]
 " The tag file that Gutentags creates and manages.
 let g:gutentags_ctags_tagfile = '.tags'
@@ -345,9 +339,13 @@ let g:gutentags_ctags_tagfile = '.tags'
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
 " Ctags related configurations
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args = [
+    \ '--languages=Python,C++',
+    \ '--fields=+niazS',
+    \ '--extras=+q',
+    \ '--c++-kinds=+px',
+    \ '--c-kinds=+px',
+    \ ]
 " Print debug information
 let g:gutentags_trace = 0
 
