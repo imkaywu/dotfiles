@@ -1,5 +1,17 @@
-BasedOnStyle: llvm
+BasedOnStyle: LLVM
+
 IndentWidth: 2
+ColumnLimit: 80 # Maximum line width before breaking
+
+# Indentation
 IndentCaseLabels: true # Indent case labels inside a switch statement
 AlwaysBreakTemplateDeclarations: Yes
-BreakBeforeBraces: Attach # prefer { on the same line
+
+# Parentheses
+BreakBeforeBraces: Attach # Prefer { to be on the same line
+
+# Function
+BinPackArguments: false # Put one argument per line if it exceeds ColumnLimit
+BinPackParameters: false # Similar to |BinPackArguments| but for declarations
+AlignAfterOpenBracket: true # Indents function arguments aligned under the opening (
+AllowAllParametersOfDeclarationOnNextLine: false # Prevents everything from going on the next line unnecessarily.
