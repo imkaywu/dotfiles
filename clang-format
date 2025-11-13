@@ -1,3 +1,5 @@
 BasedOnStyle: llvm
 IndentWidth: 2
+IndentCaseLabels: true # Indent case labels inside a switch statement
 AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Attach # prefer { on the same line
