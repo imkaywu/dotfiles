@@ -1,20 +1,108 @@
-BasedOnStyle: Google
+# ==========================================================
+# .clang-format
+# Base style + custom overrides for readable modern C++
+# ==========================================================
 
-# --- Line width ---
-ColumnLimit: 80
+# ----------------------------------------------------------
+# Base Preset
+# ----------------------------------------------------------
 
-# --- Indentation ---
-IndentWidth: 2
-IndentCaseLabels: true # Indent case labels inside a switch statement
+BasedOnStyle: Google # Start from built-in Google style rules
 
-# --- Templates ---
+# ----------------------------------------------------------
+# Line Width / Wrapping
+# ----------------------------------------------------------
+
+ColumnLimit: 80 # Maximum preferred line width before wrapping
+
+# ----------------------------------------------------------
+# Indentation
+# ----------------------------------------------------------
+
+IndentWidth: 2 # Number of spaces for each indentation level
+
+IndentCaseLabels: true # Indent 'case' labels inside switch blocks
+
+# ----------------------------------------------------------
+# Braces
+# ----------------------------------------------------------
+
+BreakBeforeBraces: Attach # Keep opening brace on same line
+
+# Example:
+# if (x) {
+#   ...
+# }
+
+# ----------------------------------------------------------
+# Templates
+# ----------------------------------------------------------
+
 AlwaysBreakTemplateDeclarations: Yes
+# Force template declarations onto their own line
+#
+# Example:
+# template <typename T>
+# class Vec {};
 
-# --- Braces ---
-BreakBeforeBraces: Attach # Keep { on the same line
+# ----------------------------------------------------------
+# Function Calls / Parameters
+# ----------------------------------------------------------
 
-# --- Function formatting ---
-BinPackArguments: false # Put one argument per line if it exceeds ColumnLimit
-BinPackParameters: false # Similar to |BinPackArguments| but for declarations
-AlignAfterOpenBracket: true # Indents function arguments aligned under the opening (
-AllowAllParametersOfDeclarationOnNextLine: false # Prevents everything from going on the next line unnecessarily.
+BinPackArguments: false
+# When arguments wrap, place one argument per line instead of packing many
+
+BinPackParameters: false
+# Same as above, but for function declarations
+
+AlignAfterOpenBracket: true
+# Align wrapped parameters/arguments under opening parenthesis
+
+AllowAllParametersOfDeclarationOnNextLine: false
+# Prevent moving all parameters to next line in a compact style
+
+# ----------------------------------------------------------
+# Pointer / Reference Style
+# ----------------------------------------------------------
+
+DerivePointerAlignment: false
+# Do not guess pointer alignment from existing codebase
+
+PointerAlignment: Left
+# Place * with the type:
+# int* ptr;
+
+ReferenceAlignment: Left
+# Place & with the type:
+# std::string& name;
+
+# ----------------------------------------------------------
+# Includes
+# ----------------------------------------------------------
+
+SortIncludes: true
+# Automatically sort #include lines alphabetically/grouped
+
+# ----------------------------------------------------------
+# Parentheses Spacing
+# ----------------------------------------------------------
+
+SpaceBeforeParens: ControlStatements
+# Add space before parentheses only for control statements
+#
+# if (x)
+# while (x)
+# for (...)
+#
+# But:
+# func()
+# method()
+
+# ----------------------------------------------------------
+# Modern C++ Brace Initialization
+# ----------------------------------------------------------
+
+Cpp11BracedListStyle: true
+# Format brace-init lists using modern C++ style
+#
+# std::vector<int> v{1, 2, 3};
