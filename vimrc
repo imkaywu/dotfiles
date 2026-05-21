@@ -316,9 +316,12 @@ let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 " Displaying ALE error information in the status bar
 let g:airline#extensions#ale#enabled = 1
+" Show Gutentags status in Airline
+let g:airline#extensions#gutentags#enabled = 1
 
 " Gutentags
-set statusline+=%{gutentags#statusline()}
+" Use ctags for tag generation
+let g:gutentags_modules = ['ctags']
 " A list of project root marker that determines if a file should be managed by
 " Gutentags.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
