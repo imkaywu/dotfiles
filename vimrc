@@ -54,7 +54,7 @@ else
 endif
 
 " Flagging Unnecessary Whitespace
-au BufRead, BufNewFile *.py,*.pyw,*.c,*.cpp,*cc,*.h,*.hpp match BadWhitespace /\s\+$/ 
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.cc,*.h,*.hpp match BadWhitespace /\s\+$/
 
 " Return to last edit position when opening files (extremely useful)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -206,12 +206,12 @@ noremap <leader>Q :q!<cr>
 " Fast saving and exiting
 noremap <leader>W :wq<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W w !sudo tee % > /dev/null
 
 " Open file (there is an invisible trailing whitespace)
-noremap <leader>e :e 
+noremap <leader>e :e
 
 " Move up and down by paragraph
 noremap [ {
@@ -373,6 +373,7 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['isort', 'black'],
+\   'c': ['clang-format'],
 \   'cpp': ['clang-format'],
 \}
 let g:ale_python_isort_options='--profile black'
@@ -401,7 +402,7 @@ let g:clang_complete_auto = 1          " auto popup when typing
 " libclang.dylib (on macOS) or libclang.so (on Linux).
 let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " Add system include dirs for macOS libc++ STL
-let g:clang_user_options = '-std=c++17'
+let g:clang_user_options = '-std=c++20'
 let g:clang_user_options .= ' -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
 let g:clang_user_options .= ' -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include'
 
