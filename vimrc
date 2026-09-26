@@ -54,7 +54,7 @@ else
 endif
 
 " Flagging Unnecessary Whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.cc,*.h,*.hpp match BadWhitespace /\s\+$/
+au BufRead, BufNewFile *.py,*.pyw,*.c,*.cpp,*.cc,*.h,*.hpp match BadWhitespace /\s\+$/
 
 " Return to last edit position when opening files (extremely useful)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
